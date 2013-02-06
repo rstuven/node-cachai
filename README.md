@@ -38,6 +38,27 @@ How It Works
 		                         onPurge: function(k, v) { console.log('removed ' + k); }
 		                        });
 
+
+        // You can also generate an item with node style callbacks. This prevents double generation, if multiple requests try to fetch the same cache item.
+        // parameters: key - The key to refer to the item.
+        //             generator - The generator called when the cache item doesn't exist. The context (this) passed to the generator must be called like callback, with the result, or error.
+        //                         You can also return the data from generator, but not both.
+        //             callback - The callback called when the item was generated. Signature: callback(err, data)
+        //             options - See setItem for info
+   		cache.getOrGenerateItem('someKey', function() {
+   			var data = generate some data ...
+   			if(some error) {
+   				this(error);
+   			} else {
+                //either
+   				this(null, data);
+                //or
+                return data;
+   			}
+   		}, function(err, data) {
+   			//handle the generated data
+   		});
+
 		// retrieve an item from the cache
 		// takes one parameter, the key to retreive
 		// returns the cached item
@@ -59,6 +80,7 @@ How It Works
 
 History
 -------
+* 2/6/2013: Stefan Klug added node style generator support
 * 2/22/2012: Forked from Monsur Hossain repo and ported to Node.js.
 * 11/29/2011: Thanks to Andrew Carman for tests, pluggable backends, localStorage persistance, and bug fixes.
 * 1/8/2011: Migrated project to GitHub.
