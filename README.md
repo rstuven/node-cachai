@@ -47,19 +47,19 @@ How It Works
         //                         You can also return the data from generator, but not both.
         //             callback - The callback called when the item was generated. Signature: callback(err, data)
         //             options - See setItem for info
-           cache.getOrGenerateItem('someKey', function() {
-               var data = generate some data ...
-               if(some error) {
-                   this(error);
-               } else {
-                   //either
-                   this(null, data);
-                   //or
-                   return data;
-               }
-           }, function(err, data) {
-               //handle the generated data
-           });
+       cache.getOrGenerateItem('someKey', function() {
+           var data = generate some data ...
+           if(some error) {
+               this(error);
+           } else {
+               //either
+               this(null, data);
+               //or
+               return data;
+           }
+       }, function(err, data) {
+           //handle the generated data
+       });
 
         // retrieve an item from the cache
         // takes one parameter, the key to retreive
