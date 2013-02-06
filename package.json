@@ -2,7 +2,7 @@
   "author": "Ricardo Stuven <rstuven@gmail.com>",
   "name": "cachai",
   "description": "LRU Cache for Node.js",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "homepage": "https://github.com/rstuven/node-cachai",
   "repository": {
     "type": "git",
