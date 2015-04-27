@@ -14,7 +14,7 @@
   "directories": {
     "lib": "./lib"
   },
-  "main": "./lib/cache",
+  "main": "./lib/index.js",
   "devDependencies": {
     "blanket": "git://github.com/alex-seville/blanket.git",
     "chai": "*",

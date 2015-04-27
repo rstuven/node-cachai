@@ -1,5 +1,5 @@
-Cache = require '../'
-LocalStorageCacheStorage = require '../lib/stores/local_storage'
+{Cache} = require '../'
+{LocalStorageCacheStorage} = require '../'
 sinon = require 'sinon'
 chai = require 'chai'
 chai.should()
@@ -29,7 +29,7 @@ describe 'LocalStorageCacheStorage', ->
     localStorage.clear()
 
   it 'stores items in localStorage', ->
-    cache = new Cache(2, false, new LocalStorageCacheStorage())
+    cache = new Cache(2, new LocalStorageCacheStorage())
     cache.setItem "foo1", "bar1"
 
     @clock.tick()
@@ -48,9 +48,9 @@ describe 'LocalStorageCacheStorage', ->
     localStorage.length.should.equal 0
 
   it 'shares items between caches with the same namespace', ->
-    cache1 = new Cache(-1, false, new LocalStorageCacheStorage('a'))
+    cache1 = new Cache(-1, new LocalStorageCacheStorage('a'))
     cache1.setItem "foo", "bar"
-    cache2 = new Cache(-1, false, new LocalStorageCacheStorage('a'))
+    cache2 = new Cache(-1, new LocalStorageCacheStorage('a'))
     cache1.size().should.equal 1
     cache2.size().should.equal 1
     localStorage.length.should.equal 1
@@ -60,9 +60,9 @@ describe 'LocalStorageCacheStorage', ->
     localStorage.length.should.equal 0
 
   it 'does not share items between caches with different namespace', ->
-    cache1 = new Cache(-1, false, new LocalStorageCacheStorage('a'))
+    cache1 = new Cache(-1, new LocalStorageCacheStorage('a'))
     cache1.setItem "foo", "bar"
-    cache2 = new Cache(-1, false, new LocalStorageCacheStorage('b'))
+    cache2 = new Cache(-1, new LocalStorageCacheStorage('b'))
     cache1.size().should.equal 1
     cache2.size().should.equal 0
     localStorage.length.should.equal 1
