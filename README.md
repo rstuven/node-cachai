@@ -27,7 +27,7 @@ parameter which places a limit on how many
 items the cache holds.
 Example:
 ``` javascript
-var Cache = require('cachai');
+var Cache = require('cachai').Cache;
 
 var cache = new Cache();
 ```
@@ -104,3 +104,27 @@ Example:
 ``` javascript
 cache.clear();
 ```
+
+
+### LocalStorage persistance
+
+You can have the cache persist its values to localStorage on browsers
+(using browserify or webpack).
+
+To do this, simply create the cache with a different storage backend:
+
+``` javascript
+var cachai = require('cachai');
+var cache = new cachai.Cache(-1, new cachai.LocalStorageCacheStorage());
+```
+
+All values have to be JSON stringifiable.
+
+If you want to have multiple independent caches,
+pass in a namespace argument, like:
+
+``` javascript
+var cache = new cachai.Cache(-1, new cachai.LocalStorageCacheStorage('myNameSpace'));
+```
+
+If -1 is used for the cache size, the cache will be limited to the size of localStorage, which is currently 5MB on Chrome/Safari.
